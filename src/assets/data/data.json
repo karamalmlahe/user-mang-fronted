@@ -1,0 +1,45 @@
+{
+    "accounts": [
+        {
+            "id": 1,
+            "username": "",
+            "email": "karamturi@gmail.com",
+            "password": ""
+        },
+        {
+            "id": 2,
+            "username": "karamturi2",
+            "email": "karamturi2@gmail.com",
+            "password": "@Ka123"
+        },
+        {
+            "id": 3,
+            "username": "karamturi3",
+            "email": "karamturi3@gmail.com",
+            "password": "@Ka123"
+        }
+    ],
+    "orders": [
+        {
+            "id": 1,
+            "accountId": 1,
+            "numbersOfItems": 3,
+            "totalPrice": 8.34,
+            "createdAt": "27.12.2022"
+        },
+        {
+            "id": 2,
+            "accountId": 1,
+            "numbersOfItems": 5,
+            "totalPrice": 13.90,
+            "createdAt": "22.12.2022"
+        },
+        {
+            "id": 3,
+            "accountId": 2,
+            "numbersOfItems": 5,
+            "totalPrice": 13.90,
+            "createdAt": "25.12.2022"
+        }
+    ]
+}

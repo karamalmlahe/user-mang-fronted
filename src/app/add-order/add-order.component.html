@@ -1,0 +1,31 @@
+<!-- <div class="d-flex justify-content-center">
+  <h4 class="me-2">add new order</h4>
+  <label class="switch">
+    <input type="checkbox" [(ngModel)]="isFormOpen" />
+    <span class="slider round"></span>
+  </label>
+  *ngIf="isFormOpen"
+</div> -->
+<div class="pt-3">
+  <div>
+    <label for="numberOfItems">Number Of Items :</label>
+    <select
+      id="numberOfItems"
+      class="form-select"
+      convert-to-number
+      [(ngModel)]="numberOfItems"
+    >
+      <option selected [value]="undefined">Select Item</option>
+      <option *ngFor="let num of ordersService.getItems()" [value]="num">
+        {{ num }}
+      </option>
+    </select>
+    <span class="text-danger fw-bold">{{ numberOfItemsError }}</span>
+  </div>
+  <div>
+    <p class="fs-5 m-0">Price : {{ getPrice.toFixed(2) }}</p>
+  </div>
+  <button class="w-100 btn btn-success mt-2" (click)="addOrder()">
+    Add Order
+  </button>
+</div>

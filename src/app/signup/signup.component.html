@@ -1,0 +1,62 @@
+<div class="w-100 py-3">
+  <div
+    class="py-3 d-flex justify-content-center flex-column"
+  >
+    <h3 class="py-3 border-bottom w-100 text-center">Sign Up Page</h3>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label class="d-flex fw-bold" for="username">Username :</label>
+        <input
+          id="username"
+          class="w-100"
+          placeholder="Enter Username"
+          type="text"
+          formControlName="username"
+        />
+        <span class="text-danger fw-bold">{{ usernameError }}</span>
+      </div>
+      <div>
+        <label class="d-flex fw-bold" for="email">Email :</label>
+        <input
+          id="email"
+          class="w-100"
+          placeholder="Enter Email"
+          type="text"
+          formControlName="email"
+        />
+        <span class="text-danger fw-bold">{{ emailError }}</span>
+      </div>
+      <div formGroupName="passwordGroup">
+        <div>
+          <label class="d-flex fw-bold" for="password">Password :</label>
+          <input
+            id="password"
+            class="w-100"
+            placeholder="Enter Password"
+            type="password"
+            formControlName="password"
+          />
+          <span
+            class="text-danger d-flex fw-bold"
+            *ngFor="let err of passwordError"
+            >{{ err }}</span
+          >
+        </div>
+        <div>
+          <label class="d-flex fw-bold" for="confirmPassword"
+            >Confirm Password :</label
+          >
+          <input
+            id="confirmPassword"
+            class="w-100"
+            placeholder="Enter Confirm Password"
+            type="password"
+            formControlName="confirmPassword"
+          />
+          <span class="text-danger fw-bold">{{ passwordConfirmError }}</span>
+        </div>
+      </div>
+      <button class="w-100 btn btn-success mt-2">Sign up</button>
+    </form>
+  </div>
+</div>
