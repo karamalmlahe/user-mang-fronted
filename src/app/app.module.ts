@@ -13,15 +13,19 @@ import { AddOrderComponent } from './add-order/add-order.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HaederComponent,
     SignupComponent,
     OrdersUserComponent,
     AddOrderComponent,
     NotFoundComponent,
-  ],
+    LoginComponent,
+      HomeComponent
+   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

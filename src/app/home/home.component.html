@@ -1,0 +1,15 @@
+<div class="p-4" [ngStyle]="{ backgroundColor: backgroundColor }">
+  <!-- cookies -->
+  <h2>Welcome Nameeeee</h2>
+  <ul>
+    <li><a routerLink="/login">Login</a></li>
+    <li><a routerLink="/signup">Sign up</a></li>
+    <!-- cookies -->
+    <li><a routerLink="/cust/:id/orders">Orders</a></li>
+    <li><a routerLink="/new-order/:id">Add Orders</a></li>
+  </ul>
+  <div class="d-flex">
+    <label class="pe-2"> Select Background Color: </label>
+    <input type="color" [(ngModel)]="backgroundColor" />
+  </div>
+</div>

@@ -18,7 +18,12 @@ export class AccountService {
       password: password,
     });
   }
-
+  login(username: String, password: String): Observable<any> {
+    return this.http.post('http://localhost:8080/api/users/login', {
+      username: username,
+      password: password,
+    });
+  }
 }
 
 // let account = this.getAccountByEmail(email);
