@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs';
-import IAccount from 'src/interfaces/IAccount';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -10,7 +8,8 @@ import {
 import { AccountService } from 'src/services/account-services/account.service';
 import { Validation } from 'src/validations';
 import { errors } from 'src/shared/errors';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { CookiesService } from 'src/services/cookie-service/cookies.service';
 
 @Component({
   selector: 'app-signup',
@@ -26,7 +25,8 @@ export class SignupComponent implements OnInit {
   submitted = false;
   constructor(
     protected accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private cookiesService: CookiesService
   ) {
     this.signupForm = new FormGroup({});
   }
@@ -73,7 +73,9 @@ export class SignupComponent implements OnInit {
         )
         .subscribe((res) => {
           if (res.success) {
-            this.router.navigate([`cust/${res.data.id}/orders`]);
+            this.cookiesService.setUserId(res.data.id);
+            this.router.navigate([`/`]);
+            // this.router.navigate([`cust/${res.data.id}/orders`]);
           } else {
             if (res.message == 'the email is not exists') {
               this.email?.setErrors({ emailIsNotExists: true });
@@ -117,7 +119,7 @@ export class SignupComponent implements OnInit {
       else if (this.email.errors?.['email']) return errors.email();
       else if (this.email.errors?.['emailIsNotExists'])
         return 'This email is not exists';
-        else if (this.email.errors?.['emailIsUpdated'])
+      else if (this.email.errors?.['emailIsUpdated'])
         return 'the account is already updated';
       return '';
     }

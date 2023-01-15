@@ -19,9 +19,20 @@ export class AccountService {
     });
   }
   login(username: String, password: String): Observable<any> {
-    return this.http.post('http://localhost:8080/api/users/login', {
-      username: username,
-      password: password,
+    return this.http.post(
+      'http://localhost:8080/api/users/login',
+      {
+        username: username,
+        password: password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  getCurrentUser(): Observable<any> {
+    return this.http.get(`http://localhost:8080/api/users/currentUser`, {
+      withCredentials: true,
     });
   }
 }

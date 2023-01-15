@@ -15,11 +15,11 @@ const routes: Routes = [
     component: SignupComponent,
   },
   {
-    path: 'cust/:id/orders',
+    path: 'my/orders',
     component: OrdersUserComponent,
   },
   {
-    path: 'new-order/:id',
+    path: 'my/new-order',
     component: AddOrderComponent,
   },
   {

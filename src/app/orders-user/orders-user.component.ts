@@ -3,7 +3,8 @@ import { AccountService } from './../../services/account-services/account.servic
 import { Component, OnInit } from '@angular/core';
 import IOrder from 'src/interfaces/IOrder';
 import { OrdersService } from 'src/services/order-services/orders.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { CookiesService } from 'src/services/cookie-service/cookies.service';
 
 @Component({
   selector: 'app-orders-user',
@@ -15,26 +16,22 @@ export class OrdersUserComponent implements OnInit {
   userOrders: IOrder[] = [];
   search: string = '';
   filteredData: IOrder[];
-  userId: number;
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     protected ordersService: OrdersService,
     protected accountService: AccountService
-  ) {
-    this.userId = Number(this.route.snapshot.paramMap.get('id'));
-  }
+  ) {}
   ngOnInit(): void {
     this.InitUserOrders();
   }
   InitUserOrders() {
-    this.ordersService.getOrdersByUserId(this.userId).subscribe(
+    this.ordersService.getCurrentUserOrders().subscribe(
       (res) => {
         this.userOrders = res.data;
         this.filterData();
       },
       () => {
-        this.router.navigate(['not-found']);
+        this.router.navigate(['/']);
       }
     );
   }

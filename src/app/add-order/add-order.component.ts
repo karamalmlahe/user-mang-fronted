@@ -1,6 +1,8 @@
+import { CookiesService } from './../../services/cookie-service/cookies.service';
+import { AccountService } from './../../services/account-services/account.service';
 import { OrdersService } from 'src/services/order-services/orders.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-order',
@@ -13,14 +15,21 @@ export class AddOrderComponent implements OnInit {
   isFormOpen: boolean;
   userId: number;
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
-    protected ordersService: OrdersService
+    protected ordersService: OrdersService,
+    private accountService: AccountService,
+    private cookiesService: CookiesService
   ) {
     this.isFormOpen = false;
-    this.userId = Number(this.route.snapshot.paramMap.get('id'));
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.cookiesService.isUserIdExists()) {
+      this.userId = this.cookiesService.getUserId();
+      this.checkUserIfExists();
+    } else {
+      this.router.navigate([`/`]);
+    }
+  }
   get getPrice(): number {
     return this.numberOfItems
       ? this.ordersService.getPriceOfItems(this.numberOfItems)
@@ -33,7 +42,7 @@ export class AddOrderComponent implements OnInit {
         .addOrderByUserId(this.userId, this.numberOfItems)
         .subscribe(
           (res) => {
-            this.router.navigate([`cust/${this.userId}/orders`]);
+            this.router.navigate([`my/orders`]);
           },
           (error) => {
             console.log(error);
@@ -42,5 +51,14 @@ export class AddOrderComponent implements OnInit {
     } else {
       this.numberOfItemsError = 'Number of Items is mandatory';
     }
+  }
+  checkUserIfExists() {
+    this.accountService.getCurrentUser().subscribe(
+      (res) => {},
+      () => {
+        this.cookiesService.deleteId();
+        this.router.navigate([`/`]);
+      }
+    );
   }
 }

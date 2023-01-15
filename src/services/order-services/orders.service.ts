@@ -17,8 +17,8 @@ export class OrdersService {
     this.items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     this.pricePerUnit = 2.78;
   }
-  getOrdersByUserId(userId: Number): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/users/${userId}/orders`);
+  getCurrentUserOrders(): Observable<any> {
+    return this.http.get(`http://localhost:8080/api/users/currentUser/orders`);
   }
   addOrderByUserId(userId: number, numberOfItems: number): Observable<any> {
     return this.http.post(

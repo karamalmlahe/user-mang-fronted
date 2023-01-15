@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/services/account-services/account.service';
+import { CookiesService } from 'src/services/cookie-service/cookies.service';
 import { errors } from 'src/shared/errors';
 import { Validation } from 'src/validations';
 
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   constructor(
     protected accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private cookiesService: CookiesService
   ) {
     this.loginForm = new FormGroup({});
   }
@@ -52,9 +54,9 @@ export class LoginComponent implements OnInit {
         .login(this.username.value, this.password.value)
         .subscribe((res) => {
           if (res.success) {
-
             //cookie
-            // this.router.navigate([`cust/${res.data.id}/orders`]);
+            // this.cookiesService.setUserId(res.data.id);
+
             this.router.navigate([`/`]);
           } else {
             if (res.message == 'Your password is not match') {
@@ -82,8 +84,7 @@ export class LoginComponent implements OnInit {
         );
       else if (this.username.errors?.['usernameIsExists']) {
         return 'This username is exists';
-      }
-      else if (this.username.errors?.['usernameNotExists']) {
+      } else if (this.username.errors?.['usernameNotExists']) {
         return 'This username is not exists';
       }
       return '';

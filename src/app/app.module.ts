@@ -1,4 +1,3 @@
-import { DateTimeFormatPipe } from './../pipes/date-time-format.pipe';
 import { OrdersService } from './../services/order-services/orders.service';
 import { AccountService } from './../services/account-services/account.service';
 import { NgModule } from '@angular/core';
@@ -15,8 +14,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     HaederComponent,
     SignupComponent,
@@ -24,8 +24,8 @@ import { HomeComponent } from './home/home.component';
     AddOrderComponent,
     NotFoundComponent,
     LoginComponent,
-      HomeComponent
-   ],
+    HomeComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
@@ -33,7 +33,7 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [AccountService, OrdersService],
+  providers: [AccountService, OrdersService, CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
