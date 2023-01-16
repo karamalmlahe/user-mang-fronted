@@ -18,17 +18,22 @@ export class OrdersService {
     this.pricePerUnit = 2.78;
   }
   getCurrentUserOrders(): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/users/currentUser/orders`);
+    return this.http.get(`http://localhost:8080/api/users/currentUser/orders`, {
+      withCredentials: true,
+    });
   }
-  addOrderByUserId(userId: number, numberOfItems: number): Observable<any> {
+  addOrderByUserId(numberOfItems: number): Observable<any> {
     return this.http.post(
-      `http://localhost:8080/api/orders/add?userId=${userId}`,
+      `http://localhost:8080/api/orders/currentUser/add`,
       {
         // params: {
         //   userId: userId,
         // },
         numbersOfItems: numberOfItems * 1,
         totalPrice: this.getPriceOfItems(numberOfItems),
+      },
+      {
+        withCredentials: true,
       }
     );
   }

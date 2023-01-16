@@ -30,7 +30,7 @@ export class OrdersUserComponent implements OnInit {
         this.userOrders = res.data;
         this.filterData();
       },
-      () => {
+      (err) => {
         this.router.navigate(['/']);
       }
     );

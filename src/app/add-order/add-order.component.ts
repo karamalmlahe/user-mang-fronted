@@ -38,16 +38,14 @@ export class AddOrderComponent implements OnInit {
   addOrder() {
     this.numberOfItemsError = '';
     if (this.numberOfItems) {
-      this.ordersService
-        .addOrderByUserId(this.userId, this.numberOfItems)
-        .subscribe(
-          (res) => {
-            this.router.navigate([`my/orders`]);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+      this.ordersService.addOrderByUserId(this.numberOfItems).subscribe(
+        (res) => {
+          this.router.navigate([`my/orders`]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     } else {
       this.numberOfItemsError = 'Number of Items is mandatory';
     }
